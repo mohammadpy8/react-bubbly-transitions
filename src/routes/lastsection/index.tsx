@@ -1,15 +1,16 @@
 import { FC, useState } from "react";
 import { localStorageServicesTypes } from "../../@types/localStorage/locaStorageTypes";
 import { eventTypes } from "../../globalTypes";
- 
+import { stateTypes } from "../../globalTypes";
+
 const LastSection: FC = (): JSX.Element => {
-  const [data, setData] = useState<localStorageServicesTypes>({
+  const [data, setData] = useState({
     date: "",
     id: 0,
     title: "",
-  });
+  } as localStorageServicesTypes);
 
-  const submitHandler = (event : eventTypes.eventFormTypes ) => {}
+  const submitHandler = (event: eventTypes.eventFormTypes) => {};
 
   return (
     <div>
