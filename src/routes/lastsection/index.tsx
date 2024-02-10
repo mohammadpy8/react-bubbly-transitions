@@ -1,7 +1,19 @@
-import { FC, useRef, useState } from "react";
+import { CSSProperties, FC, useRef, useState } from "react";
 import { localStorageServicesTypes } from "../../@types/localStorage/locaStorageTypes";
 import { eventTypes } from "../../globalTypes";
 import { stateTypes } from "../../globalTypes";
+
+type BtnType = React.JSX.IntrinsicElements["button"];
+
+const Box = (props: CSSProperties) => <div style={props} />;
+
+
+/**
+ * // optional docblock
+ * @throws {InvalidDateFormatError} The user entered date incorrectly
+ * @throws {DateIsInFutureError} The user entered date in future
+ *
+ */
 
 const LastSection: FC = (): JSX.Element => {
   const [data, setData] = useState({
@@ -17,6 +29,28 @@ const LastSection: FC = (): JSX.Element => {
   let ArrayValue = [12, 20] as const;
 
   const submitHandler = (event: eventTypes.eventFormTypes) => {};
+
+  function withOwner(owner: string) {
+    return function <T extends { owner: string }>(
+      Component: React.ComponentType<T>
+    ) {
+      return function (props: Omit<T, "owner">): React.JSX.Element {
+        const newProps = { ...props, owner } as T;
+        return <Component {...newProps} />;
+      };
+    };
+  }
+
+  function withInjectedProps<U extends Record<string, unknown>>(
+    injectedProps: U
+  ) {
+    return function <T extends U>(Component: React.ComponentType<T>) {
+      return function (props: Omit<T, keyof U>): React.JSX.Element {
+        const newProps = { ...props, ...injectedProps } as T;
+        return <Component {...newProps} />;
+      };
+    };
+  }
 
   return (
     <div>
