@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useRef, useState } from "react";
 import { localStorageServicesTypes } from "../../@types/localStorage/locaStorageTypes";
 import { eventTypes } from "../../globalTypes";
 import { stateTypes } from "../../globalTypes";
@@ -9,6 +9,12 @@ const LastSection: FC = (): JSX.Element => {
     id: 0,
     title: "",
   } as localStorageServicesTypes);
+
+  const [value, setValue] = useState(0 as number);
+
+  const RefButton = useRef<HTMLButtonElement>(null);
+
+  let ArrayValue = [12, 20] as const;
 
   const submitHandler = (event: eventTypes.eventFormTypes) => {};
 
@@ -45,7 +51,7 @@ const LastSection: FC = (): JSX.Element => {
             value={data.date}
           />
         </div>
-        <button></button>
+        <button ref={RefButton}></button>
       </form>
     </div>
   );
